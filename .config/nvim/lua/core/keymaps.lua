@@ -1,0 +1,126 @@
+-- ─────────────────────────────────────────────
+--  core/keymaps.lua
+--  All custom keybindings
+--  <leader> = Space
+-- ─────────────────────────────────────────────
+
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- ── Better escape ─────────────────────────────
+map("i", "jk", "<ESC>", opts) -- jk to exit insert mode fast
+
+-- ── Save & quit ───────────────────────────────
+map("n", "<leader>w", ":w<CR>", { desc = "Save file" })
+map("n", "<leader>q", ":q<CR>", { desc = "Quit" })
+map("n", "<leader>Q", ":qa!<CR>", { desc = "Quit all (no save)" })
+map("n", "<leader>x", ":x<CR>", { desc = "Save and quit" })
+
+-- ── Clear search highlight ─────────────────────
+map("n", "<Esc>", ":nohl<CR>", { desc = "Clear search highlight" })
+
+-- ── Better navigation ─────────────────────────
+-- Move by visual lines (useful when wrap is on)
+map("n", "j", "gj", opts)
+map("n", "k", "gk", opts)
+
+-- Center screen after big jumps
+map("n", "<C-d>", "<C-d>zz", opts) -- half page down, keep centered
+map("n", "<C-u>", "<C-u>zz", opts) -- half page up, keep centered
+map("n", "n", "nzzzv", opts) -- next search result, centered
+map("n", "N", "Nzzzv", opts) -- prev search result, centered
+map("n", "G", "Gzz", opts) -- go to end, centered
+
+-- ── Window splits ─────────────────────────────
+map("n", "<leader>sv", ":vsplit<CR>", { desc = "Split vertical" })
+map("n", "<leader>sh", ":split<CR>", { desc = "Split horizontal" })
+map("n", "<leader>se", "<C-w>=", { desc = "Equal split sizes" })
+map("n", "<leader>sc", ":close<CR>", { desc = "Close split" })
+
+-- Navigate between splits with Ctrl+hjkl
+map("n", "<C-h>", "<C-w>h", opts)
+map("n", "<C-j>", "<C-w>j", opts)
+map("n", "<C-k>", "<C-w>k", opts)
+map("n", "<C-l>", "<C-w>l", opts)
+
+-- Resize splits with arrows
+map("n", "<C-Up>", ":resize -2<CR>", opts)
+map("n", "<C-Down>", ":resize +2<CR>", opts)
+map("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+map("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+
+-- ── Tabs ──────────────────────────────────────
+map("n", "<leader>tn", ":tabnew<CR>", { desc = "New tab" })
+map("n", "<leader>tc", ":tabclose<CR>", { desc = "Close tab" })
+map("n", "<Tab>", ":tabnext<CR>", opts)
+map("n", "<S-Tab>", ":tabprev<CR>", opts)
+
+-- ── Buffers ───────────────────────────────────
+map("n", "<leader>bd", ":bdelete<CR>", { desc = "Delete buffer" })
+map("n", "<S-l>", ":bnext<CR>", opts)
+map("n", "<S-h>", ":bprev<CR>", opts)
+
+-- ── Indenting ─────────────────────────────────
+-- Stay in visual mode after indent
+map("v", "<", "<gv", opts)
+map("v", ">", ">gv", opts)
+
+-- ── Move lines up/down ────────────────────────
+map("n", "<A-j>", ":m .+1<CR>==", opts)
+map("n", "<A-k>", ":m .-2<CR>==", opts)
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", opts)
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", opts)
+
+-- ── Better paste ──────────────────────────────
+-- Paste without overwriting register in visual mode
+map("v", "p", '"_dP', opts)
+
+-- ── Yank to end of line ───────────────────────
+map("n", "Y", "y$", opts) -- Y consistent with D and C
+
+-- ── Delete without yanking ────────────────────
+map("n", "<leader>d", '"_d', { desc = "Delete without yank" })
+map("v", "<leader>d", '"_d', { desc = "Delete without yank" })
+
+-- ── File explorer ─────────────────────────────
+map("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Toggle file explorer" })
+
+-- ── Fuzzy finder (Telescope) ──────────────────
+map("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Find files" })
+map("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "Live grep" })
+map("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "Find buffers" })
+map("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "Help tags" })
+map("n", "<leader>fr", ":Telescope oldfiles<CR>", { desc = "Recent files" })
+map("n", "<leader>fs", ":Telescope grep_string<CR>", { desc = "Grep word under cursor" })
+map("n", "<leader>fc", ":Telescope git_commits<CR>", { desc = "Git commits" })
+map("n", "<leader>fk", ":Telescope keymaps<CR>", { desc = "Find keymaps" })
+
+-- ── LSP (set in lsp config, listed here for reference) ───
+-- gd  → go to definition
+-- gr  → go to references
+-- K   → hover docs
+-- <leader>ca → code action
+-- <leader>rn → rename symbol
+-- <leader>ld → show diagnostics
+
+-- ── Git (Gitsigns) ────────────────────────────
+map("n", "<leader>gb", ":Gitsigns blame_line<CR>", { desc = "Git blame line" })
+map("n", "<leader>gp", ":Gitsigns preview_hunk<CR>", { desc = "Preview hunk" })
+map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>", { desc = "Reset hunk" })
+map("n", "<leader>gs", ":Gitsigns stage_hunk<CR>", { desc = "Stage hunk" })
+map("n", "]h", ":Gitsigns next_hunk<CR>", { desc = "Next git hunk" })
+map("n", "[h", ":Gitsigns prev_hunk<CR>", { desc = "Prev git hunk" })
+
+-- ── Diagnostics ───────────────────────────────
+map("n", "<leader>ld", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
+map("n", "<leader>lq", vim.diagnostic.setloclist, { desc = "Diagnostics to quickfix" })
+
+-- ── Terminal ──────────────────────────────────
+map("n", "<leader>tt", ":terminal<CR>", { desc = "Open terminal" })
+map("t", "<Esc>", "<C-\\><C-n>", opts) -- exit terminal mode with Esc
+
+-- Python
+-- Run current Python file with <Space>rp
+map("n", "<leader>rp", ":split | terminal python3 %<CR>", { desc = "Run Python file" })

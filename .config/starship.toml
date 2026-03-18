@@ -1,0 +1,174 @@
+# ─────────────────────────────────────────────
+#  Starship Config — High Contrast / Professional
+#  Place at: ~/.config/starship.toml
+#  Install:  curl -sS https://starship.rs/install.sh | sh
+#  Enable:   add `starship init fish | source` to ~/.config/fish/config.fish
+# ─────────────────────────────────────────────
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[┌](bold white) $directory$git_branch$git_status$git_ahead_behind\
+$kubernetes$aws$gcloud$azure\
+$python$nodejs$golang$rust$java$terraform\
+$cmd_duration$status
+[└](bold white)$character"""
+
+add_newline = true
+
+# ── Directory ─────────────────────────────────
+[directory]
+format = "[ $path]($style)[$read_only]($read_only_style) "
+style = "bold cyan"
+read_only = " 󰌾"
+read_only_style = "red"
+truncation_length = 4
+truncate_to_repo = true
+truncation_symbol = "…/"
+
+# ── Character (prompt symbol) ─────────────────
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold yellow)"
+
+# ── Git ───────────────────────────────────────
+[git_branch]
+format = "on [$symbol$branch(:$remote_branch)]($style) "
+symbol = " "
+style = "bold #FFD600"
+truncation_length = 28
+truncation_symbol = "…"
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold white"
+conflicted = "⚡[$count](bold red) "
+ahead = "⬆[$count](bold green)"
+behind = "⬇[$count](bold red)"
+diverged = "⬆[$ahead_count](bold green)⬇[$behind_count](bold red) "
+untracked = "?[$count](bold yellow) "
+stashed = "󰆓[$count](bold blue) "
+modified = "![$count](bold yellow) "
+staged = "+[$count](bold green) "
+deleted = "✘[$count](bold red) "
+renamed = "»[$count](bold cyan) "
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)](bold red)\) '
+
+# ── AWS ───────────────────────────────────────
+[aws]
+# format = ' [  $profile(\($region\))]($style)'
+symbol = "on 🔶 "
+format = ' [$symbol($profile)(\($region\))]($style)'
+style = "bold #FF9900"
+disabled = false
+
+[aws.region_aliases]
+us-east-1 = "us-e1"
+us-east-2 = "us-e2"
+us-west-1 = "us-w1"
+us-west-2 = "us-w2"
+eu-west-1 = "eu-w1"
+eu-central-1 = "eu-c1"
+ap-southeast-1 = "ap-se1"
+ap-northeast-1 = "ap-ne1"
+
+# ── GCP ───────────────────────────────────────
+[gcloud]
+format = ' [$symbol($project)(\($region\))]($style)'
+style = "bold #4285F4"
+symbol = "󱇶 "
+disabled = false
+
+# ── Azure ─────────────────────────────────────
+[azure]
+format = ' [ $symbol($subscription)]($style)'
+style = "bold #0078D4"
+symbol = "󰠅 "
+disabled = false
+
+# ── Kubernetes ────────────────────────────────
+[kubernetes]
+format = ' [ $symbol($context)(\[$namespace\])]($style)'
+style = "bold #326CE5"
+symbol = "󱃾 "
+disabled = false
+
+[[kubernetes.contexts]]
+context_pattern = ".*prod.*"
+style = "bold red"
+symbol = "󱃾 "
+
+[[kubernetes.contexts]]
+context_pattern = ".*staging.*"
+style = "bold yellow"
+symbol = "󱃾 "
+
+# ── Languages (show only when relevant) ───────
+[python]
+format = ' [ $symbol($version)($virtualenv)]($style)'
+style = "bold #3572A5"
+symbol = " "
+detect_files = ["*.py", "pyproject.toml", "requirements.txt", "Pipfile", ".python-version"]
+
+[nodejs]
+format = ' [ $symbol($version)]($style)'
+style = "bold #43A047"
+symbol = "󰎙 "
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+
+[golang]
+format = ' [ $symbol($version)]($style)'
+style = "bold #00ACD7"
+symbol = " "
+detect_files = ["go.mod", "go.sum", "*.go"]
+
+[rust]
+format = ' [ $version]($style)'
+style = "bold #CE422B"
+symbol = ""
+detect_files = ["Cargo.toml", "*.rs"]
+
+[java]
+format = ' [ $version]($style)'
+style = "bold #B07219"
+symbol = ""
+detect_files = ["pom.xml", "build.gradle", "*.java"]
+
+[terraform]
+format = ' [$symbol($workspace)]($style)'
+style = "bold #7B42BC"
+symbol = "󱁢 "
+detect_files = ["*.tf", "*.tfvars"]
+
+# ── Docker context ────────────────────────────
+[docker_context]
+format = ' [$symbol($context)]($style)'
+style = "bold #2496ED"
+symbol = " "
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+
+# ── Command duration ──────────────────────────
+[cmd_duration]
+format = ' [ ⏱ $duration]($style)'
+style = "bold #888888"
+min_time = 500
+show_milliseconds = false
+
+# ── Exit status ───────────────────────────────
+[status]
+format = ' [$symbol$status]($style)'
+style = "bold red"
+# symbol = "✗ "
+symbol = "💩 "
+success_symbol = ""
+disabled = false
+
+# ── Time ──────────────────────────────────────
+[time]
+disabled = false
+format = '[ $time]($style) '
+style = "bold #555555"
+time_format = "%H:%M"

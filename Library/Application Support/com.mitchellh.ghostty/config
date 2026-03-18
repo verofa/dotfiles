@@ -1,0 +1,137 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /Users/verogo/Library/Application Support/com.mitchellh.ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+# # All of these are identical:
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+
+## Added Saturday, March 7, 2026
+
+# ─────────────────────────────────────────────
+#  Ghostty Config — High Contrast / Professional
+#  Place at: ~/.config/ghostty/config
+# ─────────────────────────────────────────────
+
+# ── Font ──────────────────────────────────────
+font-family = "JetBrainsMono Nerd Font"
+# font-family-fallback = "JetBrains Mono"
+font-size = 13.5
+font-feature = calt
+font-feature = liga
+font-feature = ss01
+font-feature = ss02
+font-thicken = true
+
+# ── Cursor ────────────────────────────────────
+cursor-style = bar
+cursor-style-blink = false
+cursor-color = #f95470
+cursor-text = #1a1b26
+
+# ── Window ────────────────────────────────────
+window-padding-x = 18
+window-padding-y = 14
+window-decoration = true
+window-title-font-family = "Berkeley Mono"
+macos-titlebar-style = transparent
+resize-overlay = never
+
+# ── Colors: High Contrast Dark ────────────────
+background = #260f48
+background-opacity = 0.90
+background-blur-radius = 20
+# foreground = #E8EAF0
+# foreground = #C8C0DC
+foreground = #c9cfeb
+
+# Black
+palette = 0= #1C2333
+palette = 8= #3B4560
+
+# Red
+#palette = 1=#FF3B5C
+palette = 1= #ef919b
+palette = 9= #FF6B82
+
+# Green
+palette = 2= #00E676
+palette = 10= #52FF9A
+
+# Yellow
+palette = 3= #FFD600
+palette = 11= #FFE44D
+
+# Blue
+# palette = 4= #e9791e
+# Dir and prompt
+# palette = 4= #a476cc
+palette = 4= #88E8E0
+palette = 12= #6EA6FF
+
+# Magenta
+palette = 5= #E040FB
+palette = 13= #EA80FC
+
+# Cyan
+# palette = 6= #00D4FF
+# palette = 14= #60E4FF
+palette = 6= #dd95aa
+palette = 14= #EA80FC
+# White
+palette = 7= #C9D1E8
+palette = 15= #FFFFFF
+
+# ── Selection ─────────────────────────────────
+selection-background = #1E3A5F
+selection-foreground = #FFFFFF
+
+# ── Scrollback ────────────────────────────────
+scrollback-limit = 10000
+
+# ── Shell integration ─────────────────────────
+shell-integration = fish
+shell-integration-features = cursor,sudo,title
+
+# ── Misc ──────────────────────────────────────
+confirm-close-surface = false
+focus-follows-mouse = false
+copy-on-select = false
+clipboard-trim-trailing-spaces = true

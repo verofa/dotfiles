@@ -1,0 +1,150 @@
+-- ─────────────────────────────────────────────
+--  plugins/lsp.lua
+--  Language Server Protocol — gives you:
+--  autocomplete, go-to-definition, hover docs,
+--  inline errors, rename, code actions
+-- ─────────────────────────────────────────────
+
+return {
+  -- Mason: installs LSP servers, linters, formatters
+  {
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    build = ":MasonUpdate",
+    opts = {
+      ui = {
+        border = "rounded",
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
+        },
+      },
+    },
+  },
+
+  -- mason-lspconfig: bridges mason + lspconfig
+  {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      -- These servers are auto-installed on first launch
+      ensure_installed = {
+        "lua_ls",           -- Lua (for editing neovim config itself)
+        "pyright",          -- Python
+        "gopls",            -- Go
+        "rust_analyzer",    -- Rust
+        "ts_ls",            -- TypeScript / JavaScript
+        "yamlls",           -- YAML
+        "jsonls",           -- JSON
+        "terraformls",      -- Terraform
+        "tflint",           -- Terraform linter
+        "bashls",           -- Bash / Shell scripts
+        "dockerls",         -- Dockerfile
+        "docker_compose_language_service", -- docker-compose
+        "cssls",            -- CSS
+        "html",             -- HTML
+      },
+      automatic_installation = true,
+    },
+  },
+
+  -- nvim-lspconfig: configures each LSP server
+  {
+    "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp",   -- adds LSP completions to nvim-cmp
+    },
+    config = function()
+      local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      -- ── Keymaps applied when LSP attaches to a buffer ──
+      local on_attach = function(_, bufnr)
+        local map = vim.keymap.set
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+        map("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition", unpack(bufopts) })
+        map("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration", unpack(bufopts) })
+        map("n", "gr", vim.lsp.buf.references, { desc = "Go to references", unpack(bufopts) })
+        map("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation", unpack(bufopts) })
+        map("n", "K", vim.lsp.buf.hover, { desc = "Hover docs", unpack(bufopts) })
+        map("n", "<C-s>", vim.lsp.buf.signature_help, { desc = "Signature help", unpack(bufopts) })
+        map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol", unpack(bufopts) })
+        map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", unpack(bufopts) })
+        map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format file", unpack(bufopts) })
+        map("n", "<leader>lt", vim.lsp.buf.type_definition, { desc = "Type definition", unpack(bufopts) })
+      end
+
+      -- ── Diagnostic signs ──────────────────────────
+      local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+      end
+
+      vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+        float = { border = "rounded", source = "always" },
+      })
+
+      -- ── Server configurations ──────────────────────
+      local servers = {
+        pyright = {},
+        gopls = {
+          settings = {
+            gopls = {
+              analyses = { unusedparams = true },
+              staticcheck = true,
+            },
+          },
+        },
+        rust_analyzer = {},
+        ts_ls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose*.yml",
+              },
+              validate = true,
+              completion = true,
+              hover = true,
+            },
+          },
+        },
+        jsonls = {},
+        terraformls = {},
+        bashls = {},
+        dockerls = {},
+        docker_compose_language_service = {},
+        cssls = {},
+        html = {},
+        lua_ls = {
+          settings = {
+            Lua = {
+              runtime = { version = "LuaJIT" },
+              diagnostics = { globals = { "vim" } },  -- don't warn on `vim` global
+              workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+              telemetry = { enable = false },
+            },
+          },
+        },
+      }
+
+      for server, config in pairs(servers) do
+        config.on_attach = on_attach
+        config.capabilities = capabilities
+        lspconfig[server].setup(config)
+      end
+    end,
+  },
+}
