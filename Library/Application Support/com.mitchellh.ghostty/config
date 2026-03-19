@@ -1,14 +1,5 @@
 # This is the configuration file for Ghostty.
 #
-# This template file has been automatically created at the following
-# path since Ghostty couldn't find any existing config files on your system:
-#
-#   /Users/verogo/Library/Application Support/com.mitchellh.ghostty/config
-#
-# The template does not set any default options, since Ghostty ships
-# with sensible defaults for all options. Users should only need to set
-# options that they want to change from the default.
-#
 # Run `ghostty +show-config --default --docs` to view a list of
 # all available config options and their default values.
 #
@@ -45,14 +36,12 @@
 
 ## Added Saturday, March 7, 2026
 
-# ─────────────────────────────────────────────
-#  Ghostty Config — High Contrast / Professional
-#  Place at: ~/.config/ghostty/config
-# ─────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────
+#  Ghostty Config — High Contrast / Professional but fun
+# ─────────────────────────────────────────────────────────
 
 # ── Font ──────────────────────────────────────
 font-family = "JetBrainsMono Nerd Font"
-# font-family-fallback = "JetBrains Mono"
 font-size = 13.5
 font-feature = calt
 font-feature = liga
@@ -79,45 +68,43 @@ background = #260f48
 background-opacity = 0.90
 background-blur-radius = 20
 # foreground = #E8EAF0
-# foreground = #C8C0DC
-foreground = #c9cfeb
+ foreground = #C8C0DC
+#foreground = #c9cfeb
 
 # Black
-palette = 0= #1C2333
-palette = 8= #3B4560
+palette = 0=#1C2333
+palette = 8=#3B4560
 
 # Red
 #palette = 1=#FF3B5C
-palette = 1= #ef919b
-palette = 9= #FF6B82
+palette = 1=#ef919b
+palette = 9=#FF6B82
 
 # Green
-palette = 2= #00E676
-palette = 10= #52FF9A
+palette = 2=#00E676
+palette = 10=#52FF9A
 
 # Yellow
-palette = 3= #FFD600
-palette = 11= #FFE44D
+palette = 3=#FFD600
+palette = 11=#FFE44D
 
 # Blue
-# palette = 4= #e9791e
 # Dir and prompt
-# palette = 4= #a476cc
-palette = 4= #88E8E0
-palette = 12= #6EA6FF
+palette = 4=#88E8E0
+palette = 12=#6EA6FF
 
 # Magenta
-palette = 5= #E040FB
-palette = 13= #EA80FC
+palette = 5=#E040FB
+palette = 13=#EA80FC
 
 # Cyan
 # palette = 6= #00D4FF
-# palette = 14= #60E4FF
-palette = 6= #dd95aa
-palette = 14= #EA80FC
+palette = 6=#dd95aa
+palette = 14=#EA80FC
+
 # White
-palette = 7= #C9D1E8
-palette = 15= #FFFFFF
+palette = 7=#C9D1E8
+palette = 15=#FFFFFF
 
 # ── Selection ─────────────────────────────────
 selection-background = #1E3A5F
