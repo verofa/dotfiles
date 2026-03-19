@@ -66,4 +66,8 @@ set -gx LS_COLORS "$LS_COLORS:*.zip=38;5;227"    # ZIP          — light yellow
 set -gx LS_COLORS "$LS_COLORS:*.tar=38;5;227"    # TAR          — light yellow
 set -gx LS_COLORS "$LS_COLORS:*.gz=38;5;227"     # GZ           — light yellow
 
+
+# ----- Eza ls output colors -------------------
+set -gx EZA_COLORS "no=38;2;201;209;232:fi=38;2;201;209;232:ue=38;2;100;149;237:ur=38;2;201;209;232:ux=38;2;100;149;237:gr=38;2;201;209;232:gx=38;2;100;149;237:tr=38;2;201;209;232:tx=38;2;100;149;237:uu=38;2;201;209;232:gu=38;2;201;209;232"
+
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
