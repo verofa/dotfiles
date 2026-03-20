@@ -17,7 +17,6 @@
 # =====================================================================
 
 # -- Font -------------------------------------------------------------
-#
 #  Primary font is JetBrains Mono with Nerd Font patching (adds icons
 #  used by tools like Starship, Neovim plugins, etc.).
 #  Font features enabled:
@@ -35,7 +34,6 @@ font-feature = ss02
 font-thicken = true
 
 # -- Cursor -----------------------------------------------------------
-#
 #  A non-blinking bar cursor (|) is less distracting than a block.
 #  The hot-pink cursor (#f95470) contrasts sharply against the dark
 #  background, making it easy to locate at a glance.
@@ -47,7 +45,6 @@ cursor-color        = #f95470
 cursor-text         = #1a1b26
 
 # -- Window & Decorations ---------------------------------------------
-#
 #  Generous padding (18 px horizontal, 14 px vertical) keeps text
 #  away from the window edges — easier on the eyes during long sessions.
 #  macos-titlebar-style = transparent blends the title bar into the
@@ -63,7 +60,6 @@ macos-titlebar-style     = transparent
 resize-overlay           = never
 
 # -- Base Colors ------------------------------------------------------
-#
 #  Deep purple background (#260f48) with slight transparency (0.90)
 #  lets the desktop bleed through subtly. background-blur-radius = 20
 #  smooths whatever is behind the window (macOS vibrancy-style effect).
@@ -81,7 +77,6 @@ foreground              = #C0C0C0
 # foreground = #c9cfeb   # soft periwinkle
 
 # -- 16-Colour Palette ------------------------------------------------
-#
 #  Terminals use a fixed palette of 16 colours (indices 0–15).
 #  Indices 0–7  are the "normal" colours.
 #  Indices 8–15 are the "bright" variants (used for bold text, etc.).
@@ -122,7 +117,6 @@ palette = 7=#C9D1E8
 palette = 15=#FFFFFF
 
 # --- Selection -------------------------------------------------------
-#
 #  Dark navy selection background with pure white text ensures
 #  selected text remains fully legible against any content.
 
@@ -130,14 +124,12 @@ selection-background = #1E3A5F
 selection-foreground = #FFFFFF
 
 # -- Scrollback -------------------------------------------------------
-#
 #  Stores up to 10,000 lines of output above the visible viewport.
 #  Increase if you regularly work with long build logs or verbose output.
 
 scrollback-limit = 10000
 
 # -- Shell Integration --------------------------------------------------
-#
 #  Ghostty has native integration with Fish shell. This enables:
 #  cursor  – shell reports its mode (insert/normal) so the cursor
 #              shape changes automatically (bar in insert, block in normal)
@@ -148,7 +140,6 @@ shell-integration          = fish
 shell-integration-features = cursor,sudo,title
 
 # -- Miscellaneous Behaviour -----------------------------------------------
-#
 # confirm-close-surface = false - close tabs/windows instantly, no dialog.
 # focus-follows-mouse   = false - focus only changes on click, not hover.
 # copy-on-select        = false - text is NOT auto-copied when highlighted;
