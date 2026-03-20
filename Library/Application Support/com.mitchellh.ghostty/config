@@ -1,58 +1,32 @@
-# This is the configuration file for Ghostty.
+# =====================================================================
+#  Ghostty Configuration — High Contrast / Professional Theme
+#  macOs Location:
+#  ~/Library/Application Support/com.mitchellh.ghostty/config
+#  or
+#  /Library/Application\ Support/com.mitchellh.ghostty/config.ghostty
+#  Linux Location:
+#  ~/.config/ghostty/config
 #
-# This template file has been automatically created at the following
-# path since Ghostty couldn't find any existing config files on your system:
+#  Ghostty docs:     https://ghostty.org/docs/config
+#  Show all options: ghostty +show-config --default --docs
 #
-#   /Users/verogo/Library/Application Support/com.mitchellh.ghostty/config
-#
-# The template does not set any default options, since Ghostty ships
-# with sensible defaults for all options. Users should only need to set
-# options that they want to change from the default.
-#
-# Run `ghostty +show-config --default --docs` to view a list of
-# all available config options and their default values.
-#
-# Additionally, each config option is also explained in detail
-# on Ghostty's website, at https://ghostty.org/docs/config.
+#  Syntax quick-reference:
+#    key = value       # basic assignment
+#    key =             # reset to default
+#    # comment         # whole-line comment only (no inline comments)
+# =====================================================================
 
-# Config syntax crash course
-# ==========================
-# # The config file consists of simple key-value pairs,
-# # separated by equals signs.
-# font-family = Iosevka
-# window-padding-x = 2
+# -- Font -------------------------------------------------------------
 #
-# # Spacing around the equals sign does not matter.
-# # All of these are identical:
-# key=value
-# key= value
-# key =value
-# key = value
-#
-# # Any line beginning with a # is a comment. It's not possible to put
-# # a comment after a config option, since it would be interpreted as a
-# # part of the value. For example, this will have a value of "#123abc":
-# background = #123abc
-#
-# # Empty values are used to reset config keys to default.
-# key =
-#
-# # Some config options have unique syntaxes for their value,
-# # which is explained in the docs for that config option.
-# # Just for example:
-# resize-overlay-duration = 4s 200ms
+#  Primary font is JetBrains Mono with Nerd Font patching (adds icons
+#  used by tools like Starship, Neovim plugins, etc.).
+#  Font features enabled:
+#    calt  – contextual alternates (e.g. arrow ligatures: ->  =>)
+#    liga  – standard ligatures
+#    ss01/ss02 – stylistic sets (variant letterforms, varies by font)
+#  font-thicken renders glyphs slightly bolder on macOS Retina screens.
 
-
-## Added Saturday, March 7, 2026
-
-# ─────────────────────────────────────────────
-#  Ghostty Config — High Contrast / Professional
-#  Place at: ~/.config/ghostty/config
-# ─────────────────────────────────────────────
-
-# ── Font ──────────────────────────────────────
 font-family = "JetBrainsMono Nerd Font"
-# font-family-fallback = "JetBrains Mono"
 font-size = 13.5
 font-feature = calt
 font-feature = liga
@@ -60,79 +34,128 @@ font-feature = ss01
 font-feature = ss02
 font-thicken = true
 
-# ── Cursor ────────────────────────────────────
-cursor-style = bar
-cursor-style-blink = false
-cursor-color = #f95470
-cursor-text = #1a1b26
+# -- Cursor -----------------------------------------------------------
+#
+#  A non-blinking bar cursor (|) is less distracting than a block.
+#  The hot-pink cursor (#f95470) contrasts sharply against the dark
+#  background, making it easy to locate at a glance.
+#  cursor-text sets the colour of the character *under* the cursor.
 
-# ── Window ────────────────────────────────────
-window-padding-x = 18
-window-padding-y = 14
-window-decoration = true
+cursor-style        = bar
+cursor-style-blink  = false
+cursor-color        = #f95470
+cursor-text         = #1a1b26
+
+# -- Window & Decorations ---------------------------------------------
+#
+#  Generous padding (18 px horizontal, 14 px vertical) keeps text
+#  away from the window edges — easier on the eyes during long sessions.
+#  macos-titlebar-style = transparent blends the title bar into the
+#  terminal background for a cleaner, full-bleed look.
+#  resize-overlay = never suppresses the size pop-up when dragging
+#  the window border.
+
+window-padding-x         = 18
+window-padding-y         = 14
+window-decoration        = true
 window-title-font-family = "Berkeley Mono"
-macos-titlebar-style = transparent
-resize-overlay = never
+macos-titlebar-style     = transparent
+resize-overlay           = never
 
-# ── Colors: High Contrast Dark ────────────────
-background = #260f48
-background-opacity = 0.90
-background-blur-radius = 20
-# foreground = #E8EAF0
-# foreground = #C8C0DC
-#foreground = #c9cfeb
-foreground = #C0C0C0
+# -- Base Colors ------------------------------------------------------
+#
+#  Deep purple background (#260f48) with slight transparency (0.90)
+#  lets the desktop bleed through subtly. background-blur-radius = 20
+#  smooths whatever is behind the window (macOS vibrancy-style effect).
+#  The foreground is a neutral light grey (#C0C0C0) — bright enough
+#  for legibility without the eye-strain of pure white.
 
-# Black
-palette = 0= #1C2333
-palette = 8= #3B4560
+background              = #260f48
+background-opacity      = 0.90
+background-blur-radius  = 20
+foreground              = #C0C0C0
 
-# Red
-#palette = 1=#FF3B5C
-palette = 1= #ef919b
-palette = 9= #FF6B82
+# Commented-out foreground alternatives — uncomment to try:
+# foreground = #E8EAF0   # slightly bluer white
+# foreground = #C8C0DC   # warm lavender tint
+# foreground = #c9cfeb   # soft periwinkle
 
-# Green
-palette = 2= #00E676
-palette = 10= #52FF9A
+# -- 16-Colour Palette ------------------------------------------------
+#
+#  Terminals use a fixed palette of 16 colours (indices 0–15).
+#  Indices 0–7  are the "normal" colours.
+#  Indices 8–15 are the "bright" variants (used for bold text, etc.).
+#
+#  This palette leans into a vibrant neon-on-dark aesthetic while
+#  keeping contrast ratios high for readability.
 
-# Yellow
-palette = 3= #FFD600
-palette = 11= #FFE44D
+# Backgrounds, borders, inactive elements
+palette = 0=#1C2333
+palette = 8=#3B4560
 
-# Blue
-# palette = 4= #e9791e
-# Dir and prompt
-# palette = 4= #a476cc
-palette = 4= #88E8E0
-palette = 12= #6EA6FF
+# Errors, git deletions, warnings
+palette = 1=#ef919b
+palette = 9=#FF6B82
 
-# Magenta
-palette = 5= #E040FB
-palette = 13= #EA80FC
+# Success, git additions, OK status
+palette = 2=#00E676
+palette = 10=#52FF9A
 
-# Cyan
-# palette = 6= #00D4FF
-# palette = 14= #60E4FF
-palette = 6= #dd95aa
-palette = 14= #EA80FC
-# White
-palette = 7= #C9D1E8
-palette = 15= #FFFFFF
+# Warnings, modified files, highlights
+palette = 3=#FFD600
+palette = 11=#FFE44D
 
-# ── Selection ─────────────────────────────────
+# Directories, prompts, links
+palette = 4=#88E8E0
+palette = 12=#6EA6FF
+
+# Special files, tags, decorators
+palette = 5=#E040FB
+palette = 13=#EA80FC
+
+# Strings, info messages
+palette = 6=#dd95aa
+palette = 14=#EA80FC
+
+# Normal text, foreground fallback
+palette = 7=#C9D1E8
+palette = 15=#FFFFFF
+
+# --- Selection -------------------------------------------------------
+#
+#  Dark navy selection background with pure white text ensures
+#  selected text remains fully legible against any content.
+
 selection-background = #1E3A5F
 selection-foreground = #FFFFFF
 
-# ── Scrollback ────────────────────────────────
+# -- Scrollback -------------------------------------------------------
+#
+#  Stores up to 10,000 lines of output above the visible viewport.
+#  Increase if you regularly work with long build logs or verbose output.
+
 scrollback-limit = 10000
 
-# ── Shell integration ─────────────────────────
-shell-integration = fish
+# -- Shell Integration --------------------------------------------------
+#
+#  Ghostty has native integration with Fish shell. This enables:
+#  cursor  – shell reports its mode (insert/normal) so the cursor
+#              shape changes automatically (bar in insert, block in normal)
+#  sudo    – passes terminal info through sudo sessions
+#  title   – sets the window title to the current command / directory
+
+shell-integration          = fish
 shell-integration-features = cursor,sudo,title
 
-# ── Misc ──────────────────────────────────────
-confirm-close-surface = false
-focus-follows-mouse = false
-copy-on-select = false
+# -- Miscellaneous Behaviour -----------------------------------------------
+#
+# confirm-close-surface = false - close tabs/windows instantly, no dialog.
+# focus-follows-mouse   = false - focus only changes on click, not hover.
+# copy-on-select        = false - text is NOT auto-copied when highlighted;
+#                                 requires an explicit Cmd+C / right-click.
+# clipboard-trim-trailing-spaces - strips trailing whitespace when copying,
+#                                  avoiding invisible characters in pastes.
+confirm-close-surface          = false
+focus-follows-mouse            = false
+copy-on-select                 = false
 clipboard-trim-trailing-spaces = true
