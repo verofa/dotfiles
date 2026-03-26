@@ -127,7 +127,8 @@ selection-foreground = #FFFFFF
 #  Stores up to 10,000 lines of output above the visible viewport.
 #  Increase if you regularly work with long build logs or verbose output.
 
-scrollback-limit = 10000
+scrollback-limit = 10000000
+
 
 # -- Shell Integration --------------------------------------------------
 #  Ghostty has native integration with Fish shell. This enables:
