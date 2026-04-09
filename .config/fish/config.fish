@@ -1,8 +1,8 @@
 starship init fish | source
-# ── NVM ───────────────────────────────────────
+# -- NVM ---------------------------------------
 load_nvm
 
-# ── PATH additions ────────────────────────────
+# -- PATH additions ----------------------------
 fish_add_path /usr/local/bin
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/go/bin
@@ -17,7 +17,7 @@ end
 set PATH $PATH /Users/verogo/.local/bin
 
 
-# ── Config & data formats ─────────────────────
+# -- Config & data formats ---------------------
 set -gx LS_COLORS "$LS_COLORS:*.yml=38;5;220"    # YAML         — gold
 set -gx LS_COLORS "$LS_COLORS:*.yaml=38;5;220"   # YAML         — gold
 set -gx LS_COLORS "$LS_COLORS:*.json=38;5;117"   # JSON         — sky cyan
@@ -28,12 +28,12 @@ set -gx LS_COLORS "$LS_COLORS:*.conf=38;5;220"   # conf         — gold
 set -gx LS_COLORS "$LS_COLORS:*.xml=38;5;117"    # XML          — sky cyan
 set -gx LS_COLORS "$LS_COLORS:*.csv=38;5;156"    # CSV          — light green
 
-# ── Infrastructure & cloud ────────────────────
+# -- Infrastructure & cloud --------------------
 set -gx LS_COLORS "$LS_COLORS:*.tf=38;5;135"     # Terraform    — purple
 set -gx LS_COLORS "$LS_COLORS:*.tfvars=38;5;99"  # TF vars      — muted purple
 set -gx LS_COLORS "$LS_COLORS:*.hcl=38;5;135"    # HCL          — purple
 
-# ── Source code ───────────────────────────────
+# -- Source code -------------------------------
 set -gx LS_COLORS "$LS_COLORS:*.py=38;5;33"      # Python       — blue
 set -gx LS_COLORS "$LS_COLORS:*.go=38;5;81"      # Go           — cyan
 set -gx LS_COLORS "$LS_COLORS:*.rs=38;5;208"     # Rust         — orange
@@ -47,12 +47,12 @@ set -gx LS_COLORS "$LS_COLORS:*.java=38;5;214"   # Java         — amber
 set -gx LS_COLORS "$LS_COLORS:*.rb=38;5;196"     # Ruby         — red
 set -gx LS_COLORS "$LS_COLORS:*.php=38;5;105"    # PHP          — purple
 
-# ── Docs ──────────────────────────────────────
+# -- Docs --------------------------------------
 set -gx LS_COLORS "$LS_COLORS:*.md=38;5;183"     # Markdown     — lavender
 set -gx LS_COLORS "$LS_COLORS:*.txt=38;5;189"    # Text         — soft white
 set -gx LS_COLORS "$LS_COLORS:*.pdf=38;5;203"    # PDF          — salmon
 
-# ── Media ─────────────────────────────────────
+# -- Media -------------------------------------
 set -gx LS_COLORS "$LS_COLORS:*.png=38;5;175"    # PNG          — pink
 set -gx LS_COLORS "$LS_COLORS:*.jpg=38;5;175"    # JPG          — pink
 set -gx LS_COLORS "$LS_COLORS:*.jpeg=38;5;175"   # JPEG         — pink
@@ -61,7 +61,7 @@ set -gx LS_COLORS "$LS_COLORS:*.svg=38;5;175"    # SVG          — pink
 set -gx LS_COLORS "$LS_COLORS:*.mp4=38;5;168"    # MP4          — mauve
 set -gx LS_COLORS "$LS_COLORS:*.mp3=38;5;168"    # MP3          — mauve
 
-# ── Archives ──────────────────────────────────
+# -- Archives ----------------------------------
 set -gx LS_COLORS "$LS_COLORS:*.zip=38;5;227"    # ZIP          — light yellow
 set -gx LS_COLORS "$LS_COLORS:*.tar=38;5;227"    # TAR          — light yellow
 set -gx LS_COLORS "$LS_COLORS:*.gz=38;5;227"     # GZ           — light yellow
@@ -71,3 +71,12 @@ set -gx LS_COLORS "$LS_COLORS:*.gz=38;5;227"     # GZ           — light yellow
 set -gx EZA_COLORS "no=38;2;201;209;232:fi=38;2;201;209;232:ue=38;2;100;149;237:ur=38;2;201;209;232:ux=38;2;100;149;237:gr=38;2;201;209;232:gx=38;2;100;149;237:tr=38;2;201;209;232:tx=38;2;100;149;237:uu=38;2;201;209;232:gu=38;2;201;209;232"
 
 alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# ----- Autostart TMUX -------------------------
+if status is-interactive
+  and not set -q TMUX
+  exec tmux new-session -A -s main
+end
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/verogo/tmp/google-cloud-sdk/path.fish.inc' ]; . '/Users/verogo/tmp/google-cloud-sdk/path.fish.inc'; end
