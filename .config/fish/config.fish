@@ -15,6 +15,8 @@ end
 
 # Created by `pipx` on 2026-03-01 01:46:33
 set PATH $PATH /Users/verogo/.local/bin
+fish_add_path /Applications/KeePassXC.app/Contents/MacOS
+
 
 
 # -- Config & data formats ---------------------
